@@ -1,0 +1,7 @@
+{
+  "clangd.path": "~/.config/coc/extensions/coc-clangd-data/install/13.0.0/clangd_13.0.0/bin/clangd",
+  "coc.preferences.formatOnSaveFiletypes": ["css", "markdown", "javascript", "javascriptreact", "typescript", "html","hbs","prisma","php"],
+  "javascript.suggestionActions.enabled": false
+
+}
+
