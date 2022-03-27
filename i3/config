@@ -16,6 +16,8 @@ font pango:DejaVu Sans Mono 14
 
 # [[ STARTUP APPLICATIONS ]]
 
+# Window Animation (Flash focus)
+exec_always --no-startup-id flashfocus
 # Network Manager (gnome)
 exec --no-startup-id nm-applet &
 # Bluetooth Manager (blueman)
@@ -37,6 +39,9 @@ bindsym $mod+Return exec i3-sensible-terminal
 
 # kill focused window
 bindsym $mod+Shift+q kill
+
+# highlight focused windows
+bindsym $mod+n exec --no-startup-id flash_window
 
 # [[ QUICK SHORTCUTS ]]
 bindsym $mod+space exec ulauncher-toggle 
@@ -159,6 +164,7 @@ bindsym XF86AudioPlay exec playerctl play-pause
 bindsym XF86AudioPause exec playerctl play-pause
 bindsym XF86AudioNext exec playerctl next
 bindsym XF86AudioPrev exec playerctl previous
+#bindsym XF86AudioPrev exec playerctl previous
 
 ## Brightness controls
 #xrandr --output eDP-1 --brightness 1.0
@@ -175,4 +181,8 @@ bindsym Print exec /home/shivkar2n/.config/i3/screenShot.sh
 for_window [class="^.*"] border none 
 gaps inner 8 
 gaps outer 8
+
+#opacity-rule = [
+#  "0:_NET_WM_STATE@:32a *= '_NET_WM_STATE_HIDDEN'"
+#];
 

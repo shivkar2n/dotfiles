@@ -1,5 +1,6 @@
 # Zathura configuration file
 # See man `man zathurarc'
+set selection-clipboard clipboard
 
 # Open document in fit-width mode by default
 set adjust-open "best-fit"
