@@ -1,0 +1,37 @@
+[Default Applications]
+text/plain=nvim.desktop
+application/pdf=org.gnome.Evince.desktop
+application/vnd.sqlite3=nvim.desktop
+text/x-c++src=nvim.desktop
+image/png=org.gnome.eog.desktop
+application/json=nvim.desktop
+image/webp=firefox-esr.desktop
+application/x-core=nvim.desktop
+image/jpeg=org.gnome.eog.desktop
+image/gif=org.gnome.eog.desktop
+application/vnd.comicbook-rar=org.gnome.Evince.desktop
+application/epub+zip=com.github.johnfactotum.Foliate.desktop
+text/html=firefox-esr.desktop
+x-scheme-handler/http=firefox-esr.desktop
+x-scheme-handler/https=firefox-esr.desktop
+x-scheme-handler/about=firefox-esr.desktop
+x-scheme-handler/unknown=firefox-esr.desktop
+application/vnd.comicbook+zip=org.gnome.Evince.desktop
+text/x-python=nvim.desktop
+
+[Added Associations]
+text/plain=nvim.desktop;
+application/pdf=org.gnome.Evince.desktop;
+application/vnd.sqlite3=nvim.desktop;
+text/x-c++src=nvim.desktop;
+image/svg+xml=feh.desktop;
+application/json=nvim.desktop;nvim.desktop;
+image/webp=firefox-esr.desktop;feh.desktop;
+application/x-core=nvim.desktop;
+image/jpeg=feh.desktop;org.gnome.eog.desktop;
+image/png=org.gnome.eog.desktop;
+image/gif=org.gnome.eog.desktop;
+application/epub+zip=org.gnome.Evince.desktop;com.github.johnfactotum.Foliate.desktop;
+application/vnd.comicbook-rar=org.gnome.Evince.desktop;
+application/vnd.comicbook+zip=org.gnome.Evince.desktop;
+text/x-python=nvim.desktop;
