@@ -78,8 +78,10 @@ To check bell settings in Xorg execute command:
 `xset q | grep bell`
 
 ## 9. Extra configuration
-Set default terminal to [kitty](https://www.how2shout.com/linux/how-to-set-kitty-as-default-terminal-in-ubuntu-22-04-or-20-04/)
-Set mime-types accordingly in `~/.config/mimeapps.list`
+- Set default terminal to [kitty](https://www.how2shout.com/linux/how-to-set-kitty-as-default-terminal-in-ubuntu-22-04-or-20-04/)
+- Set mime-types accordingly in `~/.config/mimeapps.list`
+- Copy all `.ttf` files in  `fonts` directory to `$HOME/.fonts`
+- Install [terminal icons](https://github.com/sebastiencs/icons-in-terminal)
 
 ## Bugs
 - Sometimes `i3-resurrect` may not work with ulauncher as it is installed locally

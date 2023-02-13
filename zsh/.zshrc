@@ -64,13 +64,16 @@ fi
 # Installed plugins
 plugins=(
 	git
+	gh
 	zsh-autosuggestions
 	vi-mode
 	branch
 	aws
+	npm
 )
 
 source $ZSH/oh-my-zsh.sh
+source ~/.local/share/icons-in-terminal/icons_bash.sh
 
 # User configuration
 export MANPATH="/usr/local/man:$MANPATH"
@@ -99,9 +102,46 @@ alias ccat='pygmentize -g | less' # Preview color output terminal
 alias ranger='ranger --choosedir=$HOME/.rangerdir; LASTDIR=`cat $HOME/.rangerdir`; cd "$LASTDIR"'
 #}}}
 
+# NNN cd on exit {{{ #
+n ()
+{
+    # Block nesting of nnn in subshells
+    if [[ "${NNNLVL:-0}" -ge 1 ]]; then
+        echo "nnn is already running"
+        return
+    fi
+
+    # The behaviour is set to cd on quit (nnn checks if NNN_TMPFILE is set)
+    # If NNN_TMPFILE is set to a custom path, it must be exported for nnn to
+    # see. To cd on quit only on ^G, remove the "export" and make sure not to
+    # use a custom path, i.e. set NNN_TMPFILE *exactly* as follows:
+    #     NNN_TMPFILE="${XDG_CONFIG_HOME:-$HOME/.config}/nnn/.lastd"
+    export NNN_TMPFILE="${XDG_CONFIG_HOME:-$HOME/.config}/nnn/.lastd"
+
+    # Unmask ^Q (, ^V etc.) (if required, see `stty -a`) to Quit nnn
+    # stty start undef
+    # stty stop undef
+    # stty lwrap undef
+    # stty lnext undef
+
+    # The backslash allows one to alias n to nnn if desired without making an
+    # infinitely recursive alias
+    \nnn "$@"
+
+    if [ -f "$NNN_TMPFILE" ]; then
+            . "$NNN_TMPFILE"
+            rm -f "$NNN_TMPFILE" > /dev/null
+    fi
+}
+# }}} NNN cd on exit #
 
 [[ -s "$HOME/.local/share/marker/marker.sh" ]] && source "$HOME/.local/share/marker/marker.sh"
 
 PROMPT='%B%F{red}%n%f@%B%F{blue}${${(%):-%m}#zoltan-}%f %B%F{green}%1~%f%b '
 RPROMPT='%B%F{yellow}${vcs_info_msg_0_}'
 export PATH=$PATH:/home/shivkar2n/.spicetify
+source /home/shivkar2n/.config/zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+export PATH="/home/shivkar2n/.deta/bin:$PATH"
+
+export PATH="/home/shivkar2n/.deta/bin:$PATH"
