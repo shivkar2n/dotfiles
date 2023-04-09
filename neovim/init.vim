@@ -13,7 +13,6 @@ call vundle#begin('~/.vim/plugins')
 	"{{{ BASIC PLUGINS
 		Plugin 'VundleVim/Vundle.vim'
 		Plugin 'tpope/vim-surround'    
-		Plugin 'preservim/nerdtree'			
 		Plugin 'mhinz/vim-startify'
 		Plugin 'voldikss/vim-floaterm'
 		Plugin 'jiangmiao/auto-pairs'
@@ -21,12 +20,14 @@ call vundle#begin('~/.vim/plugins')
 		Plugin 'junegunn/fzf.vim'
 		Plugin 'preservim/nerdcommenter'
 		Plugin 'lukas-reineke/indent-blankline.nvim'
+		Plugin 'Shougo/defx.nvim'
 		Plugin 'chrisbra/Colorizer'
 		Plugin 'mbbill/undotree'
 		Plugin 'dominickng/fzf-session.vim'
 		Plugin 'Shougo/deoplete.nvim'
 		Plugin 'ap/vim-css-color'
 		Plugin 'dense-analysis/ale'
+		Plugin 'mcchrish/nnn.vim'
 	"}}} 
 	
 	"{{{ GIT PLUGINS
@@ -50,6 +51,7 @@ Plugin 'honza/vim-snippets'
 	Plugin 'shaunsingh/nord.nvim'
 	Plugin 'catppuccin/nvim', {'as': 'catppuccin'}
 	Plugin 'sainnhe/everforest', {'as': 'everforest'}
+	Plugin 'joshdick/onedark.vim', {'as': 'onedark'}
 	Plugin 'ryanoasis/vim-devicons'			
 " }}}
 
@@ -66,7 +68,7 @@ nnoremap <A-t> :Snippets<CR>
 "{{{ BASIC CONFIGURATION
 
 set nocompatible
-colorscheme everforest
+colorscheme nord
 filetype off 
 set termguicolors
 set autoread
@@ -105,8 +107,6 @@ set hidden
 set nobackup
 set nowritebackup
 set shortmess+=c
-"set guifont=Hack\ Regular\ 15.0
-"set guifont=JetBrains\ Mono\ Medium\ 15
 set guifontwide=JetBrains\ Mono\ Medium\ 15
 syntax on
 
@@ -124,7 +124,7 @@ endif
 	" }}}
 	
 "{{{SESSIONS 
-let g:fzf_session_path = '/home/shivkar2n/.vim/sessions'
+let g:fzf_session_path = '/home/shivkar2n/.vim/session'
 nnoremap <A-m> :Sessions<CR>
 "}}}
 
@@ -139,22 +139,17 @@ nnoremap <C-h> <C-w>h
 nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
-nnoremap <leader>n :NERDTreeFocus<CR>
-nnoremap <C-n> :NERDTree<CR>
-nnoremap <leader>i :NERDTreeToggle<CR>
-nnoremap <leader>u :UndotreeToggle<CR>
-nnoremap <C-f> :NERDTreeFind<CR>
 nmap <S-Enter> O<Esc>
 nmap <CR> o<Esc>
 
-nnoremap <F6> :cd %:p:h <bar> :NERDTree %<CR>
+nnoremap <F6> :cd %:p:h <CR>
 
 "Disable git gutter bindings
 let g:gitgutter_map_keys = 0
 
 "Command Palette (FZF)
 nnoremap <silent> <A-u> :BLines<CR>
-nnoremap <silent> <A-i> :Windows<CR>
+nnoremap <silent> <A-i> :Buffers<CR>
 nnoremap <silent> <A-o> :History<CR>
 nnoremap <silent> <A-y> :FZF<CR>
 nnoremap <silent> <A-[> :Rg<CR>
@@ -169,7 +164,7 @@ noremap <silent> <A-j> :resize -2<CR>
 
 "{{{LIGHTLINE
 let g:lightline = {
-	  \ 'colorscheme': 'everforest',
+	  \ 'colorscheme': 'nord',
       \ 'active': {
       \   'left': [ [ 'mode', 'paste' ],
       \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
@@ -239,29 +234,6 @@ highlight StartifySpecial ctermfg=Magenta
 
 " }}}
 
-"{{{ NERD TREE CONFIG
-
-nnoremap <silent> tt :NERDTreeToggle<CR>
-let g:NERDTreeDirArrowExpandable = '►'
-let g:NERDTreeDirArrowCollapsible = '▼'
-let NERDTreeShowLineNumbers=0
-let NERDTreeShowHidden=0
-let NERDTreeMinimalUI =1
-let g:NERDTreeWinSize=20
-
-" Start NERDTree and put the cursor back in the other window.
-" autocmd VimEnter * NERDTree | wincmd p
-
-" Exit Vim if NERDTree is the only window left.
-autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() |
-	\ quit | endif
-
-" If another buffer tries to replace NERDTree, put it in the other window, and bring back NERDTree.
-autocmd BufEnter * if bufname('#') =~ 'NERD_tree_\d\+' && bufname('%') !~ 'NERD_tree_\d\+' && winnr('$') > 1 |
-	\ let buf=bufnr() | buffer# | execute "normal! \<C-W>w" | execute 'buffer'.buf | endif
-
-"" }}}
-
 "{{{ CUSTOM SCRIPTS
 
 function! PrintCode() "Print code in pdf format
@@ -309,16 +281,18 @@ nnoremap <silent> <leader>] :FloatermNext<CR>
 tnoremap <silent> <leader>] <C-\><C-n>:FloatermNext<CR>
 nnoremap <silent> <leader>g :FloatermNew --height=0.8 --width=1.0 --wintype=float --name=floaterm1 --position=center --autoclose=2 lazygit <CR>
 nnoremap <silent> <leader>d :FloatermNew --height=0.8 --width=1.0 --wintype=float --name=floaterm1 --position=center --autoclose=2 lazydocker <CR>
-" 1}}} 
+nnoremap <silent> <leader>i :NnnPicker %:p:h<CR>
+" }}} 
 
 " ASYNCHRONOUS LINTING ENGINE  {{{ 
 let g:ale_fixers = {
 \   '*': ['remove_trailing_lines', 'trim_whitespace'],
 \	'go': ['gopls'],
 \   'javascript': ['quick-lint-js'],
-\   'py': ['pylint'],
+\   'py': ['ruff'],
 \   'cpp': ['ccls'],
 \   'c': ['ccls'],
+\   'html': ['alex'],
 \}
 " }}} ASYNCHRONOUS LINTING ENGINE
 
@@ -331,6 +305,12 @@ autocmd FileType c autocmd BufWritePre <buffer> exec '!clang-format -i '.shelles
 autocmd FileType cpp autocmd BufWritePre <buffer> exec '!clang-format -i '.shellescape('%')
 " GO
 autocmd FileType go autocmd BufWritePre <buffer> exec '!go fmt '.shellescape('%')
+" JSON
+autocmd FileType json autocmd BufWritePre <buffer> exec '!prettier --write '.shellescape('%')
+" JS
+autocmd FileType javascript autocmd BufWritePre <buffer> exec '!prettier --write '.shellescape('%')
+" HTML
+autocmd FileType html autocmd BufWritePre <buffer> exec '!prettier --write '.shellescape('%')
 "}}}
 
 "{{{ CODERUNNER
