@@ -11,7 +11,7 @@
 
 #{{{BASIC CONFIG
 set $mod Mod4
-set $font Hack Regular 15 
+set $font Hack Regular 0
 
 # Font for window titles. Will also be used by the bar unless a different font
 font pango:$font 
@@ -35,6 +35,7 @@ for_window [class="Com.github.johnfactotum.Foliate"]    move to workspace 4, wor
 
 # Workspace 5
 for_window [class="Spotify"]                            move to workspace 5, workspace 5
+for_window [class="Rhythmbox"]							move to workspace 5, workspace 5
 for_window [class="Lollypop"]                           move to workspace 5, workspace 5
 
 # Workspace 6
@@ -42,6 +43,7 @@ for_window [class="Chromium"]                           move to workspace 6, wor
 
 # Workspace 7
 for_window [class="Postman"]                            move to workspace 7, workspace 7
+for_window [class="discord"]                            move to workspace 7, workspace 7
 
 # Workspace 8
 for_window [class="obsidian"]                           move to workspace 8, workspace 8
@@ -78,7 +80,7 @@ exec --no-startup-id xrandr --output HDMI-1 --auto --left-of eDP-1
 exec_always --no-startup-id autotiling --workspace 2 &
 
 # Wallpaper (feh)
-exec --no-startup-id feh --bg-scale fill ~/Themes/Everforest/wallpaper.png &
+exec --no-startup-id feh --bg-scale fill ~/Themes/Nord/wallpaper.png &
 
 # Mictray 
 #exec --no-startup-id mictray
@@ -275,15 +277,14 @@ gaps top 40
 default_border pixel 1
 default_floating_border pixel 1
 
+# class                 border  backgr. text    indicator
+client.focused          #4C566A #4C566A #ffffff #4C566A
+client.unfocused        #2e3440 #1f222d #888888 #1f222d
+client.focused_inactive #2e3440 #1f222d #888888 #1f222d
+client.placeholder      #2e3440 #1f222d #888888 #1f222d
+client.urgent           #900000 #900000 #ffffff #900000
 
-# class                 border  backgr. text    indicator child_border
-client.focused          #333333 #a7c080 #2f383e #2e9ef4   #2f383e
-client.focused_inactive #333333 #2f383e #D9E0EE #484e50   #2f383e
-client.unfocused        #333333 #2f383e #D9E0EE #292d2e   #2f383e
-client.urgent           #2f343a #e66868 #D9E0EE #e66868   #e66868
-client.placeholder      #000000 #0c0c0c #D9E0EE #000000   #0c0c0c
-
-client.background       #ffffff
+client.background       #242424
 
 
 #}}}

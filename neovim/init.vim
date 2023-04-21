@@ -142,7 +142,7 @@ nnoremap <C-l> <C-w>l
 nmap <S-Enter> O<Esc>
 nmap <CR> o<Esc>
 
-nnoremap <F6> :cd %:p:h <CR>
+nnoremap <F6> :cd %:p:h <bar> :NnnPicker %<CR>
 
 "Disable git gutter bindings
 let g:gitgutter_map_keys = 0
