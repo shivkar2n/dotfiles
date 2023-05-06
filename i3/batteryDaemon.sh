@@ -1,5 +1,6 @@
 #!/bin/bash
-battery=$(acpi -V | head -1 | awk '{print $4}' | cut -c 1-2)
+battery=$(acpi -V | head -1 | awk '{print $4}' | cut -d '%' -f 1)
+echo $battery
 
 if [[ $(($battery<=5)) == 1 ]]; then
 	/usr/local/bin/dunstify "Battery Level below 5%: Please connect charger"

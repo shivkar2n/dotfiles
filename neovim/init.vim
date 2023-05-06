@@ -21,7 +21,6 @@ call vundle#begin('~/.vim/plugins')
 		Plugin 'preservim/nerdcommenter'
 		Plugin 'lukas-reineke/indent-blankline.nvim'
 		Plugin 'Shougo/defx.nvim'
-		Plugin 'chrisbra/Colorizer'
 		Plugin 'mbbill/undotree'
 		Plugin 'dominickng/fzf-session.vim'
 		Plugin 'Shougo/deoplete.nvim'
@@ -32,7 +31,6 @@ call vundle#begin('~/.vim/plugins')
 	
 	"{{{ GIT PLUGINS
 		Plugin 'airblade/vim-gitgutter'
-		Plugin 'tpope/vim-fugitive'
 	"}}}
 	
 "{{{SNIPPETS
@@ -116,7 +114,7 @@ endif
 
 "}}}
 
-	" COMPLETION ENGINE {{{ 
+	" COMPLETION ENGINE {{{
 	let g:deoplete#enable_at_startup = 1
 	call deoplete#custom#option('sources', {
 	\ '_': ['ale', 'ultisnips'],
@@ -142,10 +140,12 @@ nnoremap <C-l> <C-w>l
 nmap <S-Enter> O<Esc>
 nmap <CR> o<Esc>
 
-nnoremap <F6> :cd %:p:h <bar> :NnnPicker %<CR>
 
 "Disable git gutter bindings
 let g:gitgutter_map_keys = 0
+
+" Disable default mappings for n³
+let g:nnn#set_default_mappings = 0
 
 "Command Palette (FZF)
 nnoremap <silent> <A-u> :BLines<CR>
@@ -154,12 +154,8 @@ nnoremap <silent> <A-o> :History<CR>
 nnoremap <silent> <A-y> :FZF<CR>
 nnoremap <silent> <A-[> :Rg<CR>
 
-"Split resizing
-noremap <silent> <A-l> :vertical resize +2<CR>
-noremap <silent> <A-h> :vertical resize -2<CR>
-noremap <silent> <A-k> :resize +2<CR>
-noremap <silent> <A-j> :resize -2<CR>
-
+nnoremap <F6> :cd %:p:h <bar> :NnnPicker %<CR>
+nnoremap <leader>i :NnnPicker %:p:h<CR>
 "}}}
 
 "{{{LIGHTLINE
@@ -268,20 +264,19 @@ function! HexModeToggle() "View file as a byte stream
 endfunction
 "}}}
 
-" FLOAT-TERMINAL CONFIG {{{1 
-nnoremap <silent> <leader>o :FloatermNew --height=0.4 --width=1.0 --wintype=float --name=floaterm1 --position=bottom --autoclose=2 <CR>
-tnoremap <silent> <leader>o <C-\><C-n> :FloatermNew --height=0.4 --width=1.0 --wintype=float --name=floaterm1 --position=bottom --autoclose=2 <CR>
-nnoremap <silent> <leader>t :FloatermToggle <CR>
-tnoremap <silent> <leader>t <C-\><C-n> :FloatermToggle <CR>
-nnoremap <silent> <leader>` FloatermKill <CR>
-tnoremap <silent> <leader>` <C-\><C-n>:FloatermKill<CR>
-nnoremap <silent> <leader>[ :FloatermPrev<CR>
-tnoremap <silent> <leader>[ <C-\><C-n>:FloatermPrev<CR>
-nnoremap <silent> <leader>] :FloatermNext<CR>
-tnoremap <silent> <leader>] <C-\><C-n>:FloatermNext<CR>
-nnoremap <silent> <leader>g :FloatermNew --height=0.8 --width=1.0 --wintype=float --name=floaterm1 --position=center --autoclose=2 lazygit <CR>
-nnoremap <silent> <leader>d :FloatermNew --height=0.8 --width=1.0 --wintype=float --name=floaterm1 --position=center --autoclose=2 lazydocker <CR>
-nnoremap <silent> <leader>i :NnnPicker %:p:h<CR>
+" FLOAT-TERMINAL CONFIG {{{ 
+nnoremap <silent> <A-left> :FloatermPrev<CR>
+tnoremap <silent> <A-left> <C-\><C-n> :FloatermPrev<CR>
+nnoremap <silent> <A-right> :FloatermNext<CR>
+tnoremap <silent> <A-right> <C-\><C-n> :FloatermNext<CR>
+nnoremap <silent> <A-j> :FloatermNew --height=0.4 --width=1.0 --wintype=float --position=bottom --autoclose=2 <CR>
+tnoremap <silent> <A-j> <C-\><C-n> :FloatermNew --height=0.4 --width=1.0 --wintype=float --position=bottom --autoclose=2 <CR>
+nnoremap <silent> <A-k> :FloatermToggle <CR>
+tnoremap <silent> <A-k> <C-\><C-n> :FloatermToggle <CR>
+nnoremap <silent> <A-;> :FloatermKill <CR>
+tnoremap <silent> <A-;> <C-\><C-n>:FloatermKill<CR>
+nnoremap <silent> <leader>g :FloatermNew --height=0.8 --width=1.0 --wintype=float --name=lazygit --position=center --autoclose=2 lazygit <CR>
+nnoremap <silent> <leader>d :FloatermNew --height=0.8 --width=1.0 --wintype=float --name=lazydocker --position=center --autoclose=2 lazydocker <CR>
 " }}} 
 
 " ASYNCHRONOUS LINTING ENGINE  {{{ 
@@ -295,7 +290,7 @@ let g:ale_fixers = {
 \   'html': ['alex'],
 \}
 " }}} ASYNCHRONOUS LINTING ENGINE
-
+	
 "{{{CODE FORMATTER
 " PYTHON
 autocmd FileType python autocmd BufWritePre <buffer> exec '!autopep8 '.shellescape('%') '--in-place'

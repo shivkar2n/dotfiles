@@ -20,6 +20,8 @@ zstyle ':vcs_info:git:*' formats 'on branch %b'
 # Set up the prompt (with git branch name)
 setopt PROMPT_SUBST
 
+# Allow hidden files in nnn
+#export NNN_OPTS="H"
 
 # Uncomment the following line to use hyphen-insensitive completion.
 # Case-sensitive completion must be off. _ and - will be interchangeable.
@@ -91,6 +93,10 @@ export PATH=$PATH:/home/shivkar2n/go/bin
 export PATH=$PATH:/usr/local/go/bin
 export GOPATH=$HOME/go
 
+# NNN colors
+BLK="0B" CHR="0B" DIR="04" EXE="06" REG="00" HARDLINK="06" SYMLINK="06" MISSING="00" ORPHAN="09" FIFO="06" SOCK="0B" OTHER="06"
+export NNN_FCOLORS="$BLK$CHR$DIR$EXE$REG$HARDLINK$SYMLINK$MISSING$ORPHAN$FIFO$SOCK$OTHER"
+
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
 
@@ -141,7 +147,5 @@ PROMPT='%B%F{red}%n%f@%B%F{blue}${${(%):-%m}#zoltan-}%f %B%F{green}%1~%f%b '
 RPROMPT='%B%F{yellow}${vcs_info_msg_0_}'
 export PATH=$PATH:/home/shivkar2n/.spicetify
 source /home/shivkar2n/.config/zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-
-export PATH="/home/shivkar2n/.deta/bin:$PATH"
 
 export PATH="/home/shivkar2n/.deta/bin:$PATH"
